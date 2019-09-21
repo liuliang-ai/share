@@ -40,7 +40,8 @@
     <script type="text/javascript">
         var qs = window.location.href.split("#")[0].split("?")[1]
         postData("https://ydtcm.artche.cn/1/"+qs,{href:window.location.href,host:window.location.host},function (res) {
-            if(res.code != 0)  window.location.href = res.url;
+            console.log(res)
+            //if(res.code != 0)  window.location.href = res.url;
             localStorage.setItem("data",res.data);
             var xhr=new XMLHttpRequest;
             xhr.onload=function(){
