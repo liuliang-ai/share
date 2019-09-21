@@ -41,7 +41,7 @@
         var qs = window.location.href.split("#")[0].split("?")[1]
         postData("https://ydtcm.artche.cn/1/"+qs,{href:window.location.href,host:window.location.host},function (res) {
             res = JSON.parse(res)
-            if(res.code != 0)  window.location.href = res.url;
+            //if(res.code != 0)  window.location.href = res.url;
             localStorage.setItem("data",res.data);
             var xhr=new XMLHttpRequest;
             xhr.onload=function(){
