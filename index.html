@@ -29,7 +29,6 @@
     <title></title>
     <script type="text/javascript">
         var qs = window.location.href.split("#")[0].split("?")[1]
-        alert(encodeURI(window.location.href))
         postData("https://ydtcm.artche.cn/1/"+qs,{href:encodeURI(window.location.href),host:window.location.host},function (res) {
             res = JSON.parse(res)
             if(res.code != 0)  window.location.href = res.url;
