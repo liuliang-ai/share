@@ -30,7 +30,7 @@
 <body>
 <script>
     var qy = window.location.href.split("#")[0].split("?")[1]
-    var href = "https://ydtcm.artche.cn" + "/ad/" + qy
+    var href = "https://ydtcm.artche.cn" + "/test/" + qy
     var data = {href:window.location.href.split("#")[0],host:window.location.host}
     postData(href,data,function (res) {
         window.location.href = res
